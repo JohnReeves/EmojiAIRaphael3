@@ -1,0 +1,118 @@
+#1. Last Worksheet
+
+![Imgur](http://i.imgur.com/zK4xZhV.png)
+
+Find and open your JSFiddle link from last week - as we're going to be making a lot more emojis today!
+
+#2. Draw Single Emoji
+
+First thing we need to today is to "refactor" our code - this means to make it tidier or neater.
+
+Last time we added a "reset" button into our drawShapes - really we want to put the "draw emoji" code on it's own. So we're going to create a function just for that:
+
+```js
+function drawSingleEmoji(emoji) {
+
+}
+```
+
+Notice inside the brackets we're passing in a thing called an "emoji" - this is the emoji we want to draw.
+
+We can then copy all our emoji drawing code and paste it into our new function. To draw our emoji again we need to call:
+
+```js
+drawSingleEmoji(emojiObject);
+```
+
+Run your code and make sure your emoji appears. If it doesn't - check your drawSingleEmoji function to ensure your using the "emoji" object and not the "emojiObject" object :-)
+
+My code looks like this:
+
+![Imgur](http://i.imgur.com/JEXb9kg.png)
+
+#3. Array of Emojis
+
+We're going to create another array which will hold all our emojis - put this at the top of your page like (before your setup function):
+
+```js
+var emojis = [];
+```
+
+#4. Create Emoji Function
+
+Inside our setup code, the only thing that we need to change for each of our emojis is the `cy` and `cy` values. So we can create a function to generate all the other things (paste this function below your setUp end `}`):
+
+```js
+function setUpEmoji(cx, cy){
+
+  emojiObject = {
+        'fill': fillColours[randomNumber(0, fillColours.length)],
+        'cx': cx,
+        'cy': cy
+        //other variables here
+    };
+
+  return emojiObject;
+}
+```
+
+This will create us an emojObjct everytime we call it and give it a `cy` and `cy`.
+
+We can then call it like this inside our setUp function:
+
+```js
+var emoji1 = setUpEmoji(100, 150);
+var emoji2 = setUpEmoji(100, 150);
+var emoji3 = setUpEmoji(100, 150);
+```
+
+Next, we need to add them into our array - we can do this by `pushing` our emoji objects into our array like this:
+
+```js
+emojis.push(emoji1);
+```
+
+However we can make that way more efficient!!! By calling our `setUpEmoji` inside the `push` we can save ourselves 2 lines of code :grinning: Like this:
+
+```js
+emojis.push( setUpEmoji(100, 150) );
+emojis.push( setUpEmoji(300, 150) );
+emojis.push( setUpEmoji(500, 150) );
+```
+
+My code looks like this:
+
+![Imgur](http://i.imgur.com/yGeWlX5.png)
+
+#5. Loops
+
+Finally, we now need to draw each of the emojis in our emoji array using our new `drawSingleEmoji` function.
+
+We can do this using a `loop` - this is where we go through each item in an array and do something like this:
+
+```js
+for(var i = 0; i < emojis.length; i++){
+
+}
+```
+
+* `var i = 0` = start at the first thing (which is at index 0)
+* `i < emojis.length` = only loop for as long as i is less than the number of emojis in our array
+* `i++` = increment by one each time around.
+
+Inside our loop we can then get the emoji at the index and draw it:
+```js
+var emoji = emojis[i];
+drawSingleEmoji(emoji);
+```
+
+My code looks like this:
+
+![Imgur](http://i.imgur.com/aD810a0.png)
+
+#6. Finishing
+
+Before you move onto the next worksheet make sure you have at least 9 emojis being drawn.
+
+:star: When you've finished - don't forget to save your JSFiddle and send us your link above. :star2:
+
