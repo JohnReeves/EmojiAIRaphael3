@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Emojiairaphael3 by JohnReeves</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Emojiairaphael3</h1>
+      <h2 class="project-tagline">Clean Code / Clear Code</h2>
+      <a href="https://github.com/JohnReeves/EmojiAIRaphael3" class="btn">View on GitHub</a>
+      <a href="https://github.com/JohnReeves/EmojiAIRaphael3/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/JohnReeves/EmojiAIRaphael3/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="1-last-worksheet" class="anchor" href="#1-last-worksheet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Last Worksheet</h1>
+
+<p><img src="http://i.imgur.com/zK4xZhV.png" alt="Imgur"></p>
+
+<p>Find and open your JSFiddle link from last week - as we're going to be making a lot more emojis today!</p>
+
+<h1>
+<a id="2-draw-single-emoji" class="anchor" href="#2-draw-single-emoji" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Draw Single Emoji</h1>
+
+<p>First thing we need to today is to "refactor" our code - this means to make it tidier or neater.</p>
+
+<p>Last time we added a "reset" button into our drawShapes - really we want to put the "draw emoji" code on it's own. So we're going to create a function just for that:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">drawSingleEmoji</span>(<span class="pl-smi">emoji</span>) {
+
+}</pre></div>
+
+<p>Notice inside the brackets we're passing in a thing called an "emoji" - this is the emoji we want to draw.</p>
+
+<p>We can then copy all our emoji drawing code and paste it into our new function. To draw our emoji again we need to call:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-en">drawSingleEmoji</span>(emojiObject);</pre></div>
+
+<p>Run your code and make sure your emoji appears. If it doesn't - check your drawSingleEmoji function to ensure your using the "emoji" object and not the "emojiObject" object :-)</p>
+
+<p>My code looks like this:</p>
+
+<p><img src="http://i.imgur.com/JEXb9kg.png" alt="Imgur"></p>
+
+<h1>
+<a id="3-array-of-emojis" class="anchor" href="#3-array-of-emojis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Array of Emojis</h1>
+
+<p>We're going to create another array which will hold all our emojis - put this at the top of your page like (before your setup function):</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> emojis <span class="pl-k">=</span> [];</pre></div>
+
+<h1>
+<a id="4-create-emoji-function" class="anchor" href="#4-create-emoji-function" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4. Create Emoji Function</h1>
+
+<p>Inside our setup code, the only thing that we need to change for each of our emojis is the <code>cy</code> and <code>cy</code> values. So we can create a function to generate all the other things (paste this function below your setUp end <code>}</code>):</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">setUpEmoji</span>(<span class="pl-smi">cx</span>, <span class="pl-smi">cy</span>){
+
+  emojiObject <span class="pl-k">=</span> {
+        <span class="pl-s"><span class="pl-pds">'</span>fill<span class="pl-pds">'</span></span><span class="pl-k">:</span> fillColours[<span class="pl-en">randomNumber</span>(<span class="pl-c1">0</span>, <span class="pl-smi">fillColours</span>.<span class="pl-c1">length</span>)],
+        <span class="pl-s"><span class="pl-pds">'</span>cx<span class="pl-pds">'</span></span><span class="pl-k">:</span> cx,
+        <span class="pl-s"><span class="pl-pds">'</span>cy<span class="pl-pds">'</span></span><span class="pl-k">:</span> cy
+        <span class="pl-c">//other variables here</span>
+    };
+
+  <span class="pl-k">return</span> emojiObject;
+}</pre></div>
+
+<p>This will create us an emojObjct everytime we call it and give it a <code>cy</code> and <code>cy</code>.</p>
+
+<p>We can then call it like this inside our setUp function:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> emoji1 <span class="pl-k">=</span> <span class="pl-en">setUpEmoji</span>(<span class="pl-c1">100</span>, <span class="pl-c1">150</span>);
+<span class="pl-k">var</span> emoji2 <span class="pl-k">=</span> <span class="pl-en">setUpEmoji</span>(<span class="pl-c1">100</span>, <span class="pl-c1">150</span>);
+<span class="pl-k">var</span> emoji3 <span class="pl-k">=</span> <span class="pl-en">setUpEmoji</span>(<span class="pl-c1">100</span>, <span class="pl-c1">150</span>);</pre></div>
+
+<p>Next, we need to add them into our array - we can do this by <code>pushing</code> our emoji objects into our array like this:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">emojis</span>.<span class="pl-c1">push</span>(emoji1);</pre></div>
+
+<p>However we can make that way more efficient!!! By calling our <code>setUpEmoji</code> inside the <code>push</code> we can save ourselves 2 lines of code <img class="emoji" title=":grinning:" alt=":grinning:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f600.png" height="20" width="20" align="absmiddle"> Like this:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">emojis</span>.<span class="pl-c1">push</span>( <span class="pl-en">setUpEmoji</span>(<span class="pl-c1">100</span>, <span class="pl-c1">150</span>) );
+<span class="pl-smi">emojis</span>.<span class="pl-c1">push</span>( <span class="pl-en">setUpEmoji</span>(<span class="pl-c1">300</span>, <span class="pl-c1">150</span>) );
+<span class="pl-smi">emojis</span>.<span class="pl-c1">push</span>( <span class="pl-en">setUpEmoji</span>(<span class="pl-c1">500</span>, <span class="pl-c1">150</span>) );</pre></div>
+
+<p>My code looks like this:</p>
+
+<p><img src="http://i.imgur.com/yGeWlX5.png" alt="Imgur"></p>
+
+<h1>
+<a id="5-loops" class="anchor" href="#5-loops" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5. Loops</h1>
+
+<p>Finally, we now need to draw each of the emojis in our emoji array using our new <code>drawSingleEmoji</code> function.</p>
+
+<p>We can do this using a <code>loop</code> - this is where we go through each item in an array and do something like this:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">for</span>(<span class="pl-k">var</span> i <span class="pl-k">=</span> <span class="pl-c1">0</span>; i <span class="pl-k">&lt;</span> <span class="pl-smi">emojis</span>.<span class="pl-c1">length</span>; i<span class="pl-k">++</span>){
+
+}</pre></div>
+
+<ul>
+<li>
+<code>var i = 0</code> = start at the first thing (which is at index 0)</li>
+<li>
+<code>i &lt; emojis.length</code> = only loop for as long as i is less than the number of emojis in our array</li>
+<li>
+<code>i++</code> = increment by one each time around.</li>
+</ul>
+
+<p>Inside our loop we can then get the emoji at the index and draw it:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> emoji <span class="pl-k">=</span> emojis[i];
+<span class="pl-en">drawSingleEmoji</span>(emoji);</pre></div>
+
+<p>My code looks like this:</p>
+
+<p><img src="http://i.imgur.com/aD810a0.png" alt="Imgur"></p>
+
+<h1>
+<a id="6-finishing" class="anchor" href="#6-finishing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6. Finishing</h1>
+
+<p>Before you move onto the next worksheet make sure you have at least 9 emojis being drawn.</p>
+
+<p><img class="emoji" title=":star:" alt=":star:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2b50.png" height="20" width="20" align="absmiddle"> When you've finished - don't forget to save your JSFiddle and send us your link above. <img class="emoji" title=":star2:" alt=":star2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f31f.png" height="20" width="20" align="absmiddle"></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/JohnReeves/EmojiAIRaphael3">Emojiairaphael3</a> is maintained by <a href="https://github.com/JohnReeves">JohnReeves</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
